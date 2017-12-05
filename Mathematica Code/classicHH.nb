@@ -1,0 +1,328 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10115,        318]
+NotebookOptionsPosition[      9787,        303]
+NotebookOutlinePosition[     10136,        318]
+CellTagsIndexPosition[     10093,        315]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"#INa", "[", "V_", "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"gNa", "[", "]"}], " ", "aNa", " ", 
+     RowBox[{"(", 
+      RowBox[{"V", "-", " ", "VNa"}], ")"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"#Itotal", "[", "V_", "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"INa", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"IKdr", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"IKap", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"IKm", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"IKd", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"ICac", "[", "V", "]"}], "+", " ", 
+     RowBox[{"ICal", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"ICan", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"ICat", "[", "V", "]"}], " ", "+", " ", 
+     RowBox[{"ICag", "[", "V", "]"}]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.7214698352522335`*^9, 3.721469847592325*^9}, {
+  3.7214700591867065`*^9, 3.721470173533222*^9}, {3.7214723777741914`*^9, 
+  3.721472435342222*^9}, {3.7214724829520774`*^9, 3.721472490173212*^9}, {
+  3.7214725355457144`*^9, 3.721472594863165*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"GNa", "=", 
+    RowBox[{"40", "\[Times]", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "3"}]]}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Sodium", " ", "Maximum", " ", "Conductance"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GK", "=", 
+    RowBox[{"35", "\[Times]", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "3"}]]}]}], ";", " ", 
+   RowBox[{"(*", 
+    RowBox[{"Potassium", " ", "Maximum", " ", "Conductance"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"GL", "=", 
+    RowBox[{"0.3", "\[Times]", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "3"}]]}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Leakage", " ", "Current", " ", "Maximum", " ", "Conductance"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VNa", "=", "55"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Sodium", " ", "Diffusion", " ", "Potential"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VK", "=", 
+    RowBox[{"-", "77"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Potassium", " ", "Diffusion", " ", "Potential"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VL", "=", 
+   RowBox[{"-", "65"}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{"Leakage", " ", "Current", " ", "Diffusion", " ", "Potential"}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"a", "=", 
+   RowBox[{"238", "\[Times]", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "4"}]]}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Radius", " ", "of", " ", "the", " ", "axon"}], ",", " ", 
+    RowBox[{"given", " ", "in", " ", "cm"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Cap", "=", 
+   SuperscriptBox["10", 
+    RowBox[{"-", "3"}]]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Capacitance", " ", "per", " ", "unit", " ", "area", " ", "of", " ", 
+     "the", " ", "axon", " ", "membrane"}], ",", " ", 
+    RowBox[{"given", " ", "in", " ", 
+     FractionBox["mF", 
+      SuperscriptBox["cm", "2"]]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"r", "=", 
+   RowBox[{"2", "\[Times]", 
+    SuperscriptBox["10", "4"]}]}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Longitudinal", " ", "resistance", " ", "per", " ", "unit", " ", "length",
+      " ", "of", " ", "the", " ", "axon"}], ",", " ", 
+    RowBox[{"given", " ", "in", " ", 
+     FractionBox["ohm", "cm"]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"m0", "=", "0.053"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"h0", "=", "0.59"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n0", "=", "0.318"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"V0", "=", "0"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7214745429339633`*^9, 3.721474545056428*^9}, {
+  3.7214745767852435`*^9, 3.721474599558934*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"am", "[", "V_", "]"}], ":=", 
+   FractionBox[
+    RowBox[{"0.1", 
+     RowBox[{"(", 
+      RowBox[{"25", "-", "V"}], ")"}]}], 
+    RowBox[{
+     SuperscriptBox["\[ExponentialE]", 
+      FractionBox[
+       RowBox[{"25", "-", "V"}], "10"]], "-", "1"}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"bm", "[", "V_", "]"}], ":=", 
+   RowBox[{"4", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"-", 
+      FractionBox["V", "18"]}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ah", "[", "V_", "]"}], ":=", 
+   RowBox[{"0.07", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"-", 
+      FractionBox["V", "20"]}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"bh", "[", "V_", "]"}], ":=", 
+   FractionBox["1", 
+    RowBox[{
+     SuperscriptBox["\[ExponentialE]", 
+      FractionBox[
+       RowBox[{"30", "-", "V"}], "10"]], "+", "1"}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"an", "[", "V_", "]"}], ":=", 
+   FractionBox[
+    RowBox[{"0.01", 
+     RowBox[{"(", 
+      RowBox[{"10", "-", "V"}], ")"}]}], 
+    RowBox[{
+     SuperscriptBox["\[ExponentialE]", 
+      FractionBox[
+       RowBox[{"10", "-", "V"}], "10"]], "-", "1"}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"bn", "[", "V_", "]"}], ":=", 
+    RowBox[{"0.125", 
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"-", 
+       FractionBox["V", "80"]}]]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dm", "[", "t_", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"am", "[", 
+      RowBox[{"V", "[", "t", "]"}], "]"}], 
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"m", "[", "t", "]"}]}], ")"}]}], " ", "-", " ", 
+    RowBox[{
+     RowBox[{"bm", "[", 
+      RowBox[{"V", "[", "t", "]"}], "]"}], 
+     RowBox[{"m", "[", "t", "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"dn", "[", "t_", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"an", "[", 
+      RowBox[{"V", "[", "t", "]"}], "]"}], 
+     RowBox[{"(", 
+      RowBox[{"1", "-", 
+       RowBox[{"n", "[", "t", "]"}]}], ")"}]}], " ", "-", " ", 
+    RowBox[{
+     RowBox[{"bn", "[", 
+      RowBox[{"V", "[", "t", "]"}], "]"}], 
+     RowBox[{"n", "[", "t", "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"dh", "[", "t_", "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ah", "[", 
+       RowBox[{"V", "[", "t", "]"}], "]"}], 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"h", "[", "t", "]"}]}], ")"}]}], " ", "-", " ", 
+     RowBox[{
+      RowBox[{"bh", "[", 
+       RowBox[{"V", "[", "t", "]"}], "]"}], 
+      RowBox[{"h", "[", "t", "]"}]}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"aNa", "[", "u_", "]"}], " ", ":=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"m", "[", "u", "]"}], ")"}], "\.b3", " ", 
+    RowBox[{"h", "[", "u", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"aK", "[", "u_", "]"}], " ", ":=", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"n", "[", "u", "]"}], ")"}], "4"]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"INa", "[", "u_", "]"}], " ", ":=", " ", 
+   RowBox[{"gNa", " ", "aNa", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"V", "[", "u", "]"}], " ", "-", " ", "VNa"}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"IK", "[", "u_", "]"}], " ", ":=", " ", 
+   RowBox[{"gK", " ", "aK", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"V", "[", "u", "]"}], " ", "-", " ", "VK"}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"IL", "[", "u_", "]"}], " ", ":=", " ", 
+    RowBox[{"gL", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"V", "[", "u", "]"}], " ", "-", " ", "VL"}], ")"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Itot", " ", "[", "u_", "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"INa", "[", "u", "]"}], " ", "+", " ", 
+     RowBox[{"IK", "[", "u", "]"}], " ", "+", " ", 
+     RowBox[{"IL", "[", "u", "]"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"I0", " ", "=", " ", 
+   RowBox[{"Function", "[", 
+    RowBox[{"t", ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"start", "\[LessEqual]", "t", "\[LessEqual]", "duration"}], 
+       ",", "stimulus", ",", "0"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dV", "=", 
+   RowBox[{"Function", "[", 
+    RowBox[{"t", ",", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"I0", "[", "t", "]"}], "-", 
+       RowBox[{"Itot", "[", "t", "]"}]}], "Cap"]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.721472605992802*^9, 3.7214726168787365`*^9}, {
+  3.7214726781433225`*^9, 3.7214728877116795`*^9}, {3.7214744029591084`*^9, 
+  3.721474527253888*^9}, {3.7214746578229327`*^9, 3.721474729524578*^9}}]
+},
+WindowSize->{1064, 924},
+WindowMargins->{{Automatic, 3}, {-300, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1165, 25, 69, "Input"],
+Cell[1726, 47, 2818, 82, 275, "Input"],
+Cell[4547, 131, 5236, 170, 631, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
