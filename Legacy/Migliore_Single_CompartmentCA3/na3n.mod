@@ -69,6 +69,7 @@ STATE { m h s}
 BREAKPOINT {
         SOLVE states METHOD cnexp
         thegna = gbar*m*m*m*h*s
+	:h = ina'
 	ina = thegna * (v - ena)
 } 
 
